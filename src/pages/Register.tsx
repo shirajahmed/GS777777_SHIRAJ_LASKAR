@@ -1,25 +1,29 @@
-// register page
-
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../hookss/AuthContext";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { register } = useAuth();
+  const navigate = useNavigate();
 
-  const handleRegister = async () => {
-    const newUser = { name, email, password };
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
 
     try {
+      await register(name, email, password);
       toast.success("Registration successful!");
+      navigate("/");
     } catch {
       toast.error("Registration failed!");
     }
   };
 
   return (
-    <div className="flex items-center justify-center  bg-[#f5f5f5]">
+    <div className="flex items-center justify-center bg-[#f5f5f5]">
       <form
         onSubmit={handleRegister}
         className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md border border-[#dcdcdc]"
@@ -72,9 +76,9 @@ const Register = () => {
 
         <p className="text-right text-sm">
           Already registered?{" "}
-          <a href="/login" className="text-[#ff5e8a] hover:underline">
+          <Link to="/login" className="text-[#ff5e8a] hover:underline">
             Login
-          </a>
+          </Link>
         </p>
       </form>
     </div>

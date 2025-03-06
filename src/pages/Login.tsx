@@ -1,15 +1,23 @@
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../hookss/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
-  const handleSubmit = () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
     try {
-      toast.success("Login ");
+      await login(email, password);
+      toast.success("Login successful!");
+      navigate("/");
     } catch {
-      toast.error("Something went wrong!");
+      toast.error("Invalid credentials!");
     }
   };
 
@@ -56,9 +64,9 @@ const Login = () => {
 
         <p className="text-right text-sm">
           New user?{" "}
-          <a href="/register" className="text-[#ff5e8a] hover:underline">
+          <Link to="/register" className="text-[#ff5e8a] hover:underline">
             Register Here
-          </a>
+          </Link>
         </p>
       </form>
     </div>

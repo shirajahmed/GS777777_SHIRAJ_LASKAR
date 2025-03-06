@@ -2,10 +2,16 @@
 
 import { useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
+import { useAuth } from "../hookss/AuthContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const user = localStorage.getItem("user");
+  const { user, logout } = useAuth();
+
+  const handleLogout = () => {
+    setIsOpen(false);
+    logout();
+  };
 
   return (
     <header className="h-[90px] flex items-center relative justify-between bg-white border-b border-gray-200 px-[24px] py-[30px] shadow-[-2px_2px_6px_0px_rgba(0,_0,_0,_0.1)]">
@@ -19,11 +25,11 @@ const Navbar = () => {
         {user && (
           <div className="flex  items-center space-x-3">
             <div className="w-[40px] h-[40px] bg-[rgba(196,196,196,1)] rounded-full flex items-center justify-center text-white font-medium">
-              SA
+              {user?.name[0]}
             </div>
             <div className="flex flex-col">
               <span className="text-[16px] font-semibold leading-[26px] text-[#1D1D1D]">
-                Shiraj Ahmed
+                {user?.name}
               </span>
             </div>
             <FiChevronDown
@@ -37,7 +43,7 @@ const Navbar = () => {
         <div className="absolute right-[20px] top-[65px]  bg-white shadow-lg rounded-lg">
           <button
             className="px-4 py-2 text-right text-red-600 bg-gray-100 hover:bg-gray-200 rounded-lg cursor-pointer"
-            onClick={() => {}}
+            onClick={handleLogout}
           >
             Logout
           </button>
