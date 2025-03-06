@@ -9,7 +9,7 @@ function App() {
           className="logo"
           height={200}
           width={200}
-          alt="Vite logo"
+          alt="Company logo"
         />
       </div>
     </>
