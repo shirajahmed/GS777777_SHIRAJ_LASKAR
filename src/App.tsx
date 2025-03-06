@@ -8,6 +8,8 @@ import ChartPage from "./pages/ChartPage";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import NotFoundPage from "./pages/NotFoundPage";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const App: React.FC = () => {
   return (
@@ -19,6 +21,8 @@ const App: React.FC = () => {
           <main className="flex-1 flex flex-col m-[20px]">
             <Routes>
               <Route path="/" element={<StoresPage />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
               <Route path="/skus" element={<SKUsPage />} />
               <Route path="/planning" element={<PlanningPage />} />
               <Route path="/chart" element={<ChartPage />} />
