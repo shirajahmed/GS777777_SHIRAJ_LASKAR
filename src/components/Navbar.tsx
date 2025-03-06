@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { useAuth } from "../hookss/AuthContext";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,6 +12,7 @@ const Navbar = () => {
   const handleLogout = () => {
     setIsOpen(false);
     logout();
+    toast.success("LogOut successful!");
   };
 
   return (

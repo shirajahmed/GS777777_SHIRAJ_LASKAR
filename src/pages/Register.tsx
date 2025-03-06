@@ -2,12 +2,13 @@ import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hookss/AuthContext";
+import Preloader from "../components/Preloader";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { register } = useAuth();
+  const { register, loading } = useAuth();
   const navigate = useNavigate();
 
   const handleRegister = async (e: React.FormEvent) => {
@@ -21,7 +22,9 @@ const Register = () => {
       toast.error("Registration failed!");
     }
   };
-
+  if (loading) {
+    return <Preloader />;
+  }
   return (
     <div className="flex items-center justify-center bg-[#f5f5f5]">
       <form

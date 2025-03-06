@@ -2,11 +2,12 @@ import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hookss/AuthContext";
+import Preloader from "../components/Preloader";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useAuth();
+  const { login, loading } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -20,6 +21,9 @@ const Login = () => {
       toast.error("Invalid credentials!");
     }
   };
+  if (loading) {
+    return <Preloader />;
+  }
 
   return (
     <div className="flex items-center justify-center bg-[#f5f5f5]">
