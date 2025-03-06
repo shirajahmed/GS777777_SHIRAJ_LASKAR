@@ -1,11 +1,10 @@
-// chart scrren
-
-const ChartPage = () => {
+//  404 page not found
+const NotFoundPage = () => {
   return (
     <div className="bg-white  shadow flex flex-col h-full p-[20px]">
-      ChartPage
+      NotFoundPage
     </div>
   );
 };
 
-export default ChartPage;
+export default NotFoundPage;
