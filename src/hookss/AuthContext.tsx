@@ -75,7 +75,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       const response = await axios.post(
         "https://dummydata-9wt5.onrender.com/users",
         {
-          ID: Math.floor(Math.random() * 1000),
+          id: Math.floor(Math.random() * 1000),
           name,
           email,
           password,

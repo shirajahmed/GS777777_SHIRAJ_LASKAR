@@ -1,8 +1,8 @@
 // add types
 
 export interface Store {
+  id: string;
   "Seq No.": number;
-  ID: string;
   Label: string;
   City: string;
   State: string;

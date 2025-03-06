@@ -12,7 +12,7 @@ interface StoreModalProps {
 
 const StoreModal: React.FC<StoreModalProps> = ({ store, onClose, onSave }) => {
   const [formData, setFormData] = useState<Omit<Store, "Seq No.">>({
-    ID: store?.ID || "",
+    id: store?.id || "",
     Label: store?.Label || "",
     City: store?.City || "",
     State: store?.State || "",
@@ -33,7 +33,7 @@ const StoreModal: React.FC<StoreModalProps> = ({ store, onClose, onSave }) => {
       <div className="w-full max-w-[439px] bg-white rounded-lg shadow-lg">
         <div className="flex justify-between items-center px-[20px] py-[16px] border-b-[1.5px] border-[#E4E6F6]">
           <h2 className="text-[#2C2C2C] font-semibold text-[20px]">
-            Create New Model
+            {store?.id ? "Update" : "Create"} Store
           </h2>
           <div
             className="w-[24px] h-[24px] flex items-center justify-center cursor-pointer"
@@ -47,10 +47,12 @@ const StoreModal: React.FC<StoreModalProps> = ({ store, onClose, onSave }) => {
             <label className="text-[#202020] font-normal text-[14px]">ID</label>
             <input
               type="text"
-              name="ID"
-              value={formData.ID}
+              name="id"
+              value={formData.id}
               onChange={handleChange}
-              placeholder="ID"
+              placeholder="id"
+              required
+              readOnly={!!store?.id}
               className="w-full border border-[#C7C7C7] rounded-[6px] px-[14px] py-[11px] mt-1 text-[14px] text-[#202020] outline-none"
             />
           </div>
@@ -65,6 +67,7 @@ const StoreModal: React.FC<StoreModalProps> = ({ store, onClose, onSave }) => {
               value={formData.Label}
               onChange={handleChange}
               placeholder="Label"
+              required
               className="w-full border border-[#C7C7C7] rounded-[6px] px-[14px] py-[11px] mt-1 text-[14px] text-[#202020] outline-none"
             />
           </div>
@@ -78,6 +81,7 @@ const StoreModal: React.FC<StoreModalProps> = ({ store, onClose, onSave }) => {
               value={formData.City}
               onChange={handleChange}
               placeholder="City"
+              required
               className="w-full border border-[#C7C7C7] rounded-[6px] px-[14px] py-[11px] mt-1 text-[14px] text-[#202020] outline-none"
             />
           </div>
@@ -91,6 +95,7 @@ const StoreModal: React.FC<StoreModalProps> = ({ store, onClose, onSave }) => {
               value={formData.State}
               onChange={handleChange}
               placeholder="State"
+              required
               className="w-full border border-[#C7C7C7] rounded-[6px] px-[14px] py-[11px] mt-1 text-[14px] text-[#202020] outline-none"
             />
           </div>
