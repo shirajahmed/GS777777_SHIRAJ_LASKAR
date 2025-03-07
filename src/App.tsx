@@ -18,13 +18,19 @@ const App: React.FC = () => {
   return (
     <Router>
       <div className="flex h-screen w-full bg-gray-100">
-        {user && <Sidebar />}
+        <Sidebar />
         <div className="flex flex-col flex-1">
           <Navbar />
           <main className="flex-1 flex flex-col m-[20px]">
             <Routes>
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
+              <Route
+                path="/login"
+                element={user ? <StoresPage /> : <Login />}
+              />
+              <Route
+                path="/register"
+                element={user ? <StoresPage /> : <Register />}
+              />
               <Route element={<ProtectedRoute />}>
                 <Route path="/" element={<StoresPage />} />
                 <Route path="/skus" element={<SKUsPage />} />

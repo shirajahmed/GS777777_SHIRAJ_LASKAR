@@ -16,7 +16,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="h-[90px] flex items-center relative justify-between bg-white border-b border-gray-200 px-[24px] py-[30px] shadow-[-2px_2px_6px_0px_rgba(0,_0,_0,_0.1)]">
+    <header className="h-[90px] flex items-center relative justify-between bg-white  px-[24px] py-[30px] ">
       <div className="flex items-center space-x-2"></div>
       <div className="mx-4 text-center rounded-md">
         <h1 className="text-[20px] font-semibold text-gray-800">
