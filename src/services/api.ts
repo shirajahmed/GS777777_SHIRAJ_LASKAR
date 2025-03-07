@@ -47,3 +47,8 @@ export const deleteSKU = async (id: string) => {
   const response = await axios.delete(`${API_BASE_URL}/skus/${id}`);
   return response.data;
 };
+
+export const fetchChartData = async () => {
+  const response = await axios.get(`${API_BASE_URL}/chart`);
+  return response.data;
+};
