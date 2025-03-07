@@ -9,7 +9,7 @@ import {
   FiHome,
   FiLayers,
 } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 interface MenuItem {
   name: string;
@@ -26,6 +26,7 @@ const menuItems: MenuItem[] = [
 
 const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
+  const location = useLocation();
   return (
     <aside
       className={`${
@@ -60,7 +61,9 @@ const Sidebar = () => {
           <Link
             key={idx}
             to={item.href || "#"}
-            className="flex items-center pl-[20px] space-x-3 p-2 hover:bg-[#f3f4f6] text-[#202020]"
+            className={`flex items-center pl-[20px] space-x-3 p-2 hover:bg-[#f3f4f6] text-[#202020] ${
+              location.pathname === item.href ? "bg-[#f3f4f6]" : ""
+            }`}
           >
             {item.icon}
 
