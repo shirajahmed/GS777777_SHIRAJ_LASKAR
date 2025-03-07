@@ -54,6 +54,7 @@ const SKUModal: React.FC<SKUModalProps> = ({ sku, onClose, onSave }) => {
               onChange={handleChange}
               placeholder="Label"
               required
+              disabled={!!sku?.id}
               className="w-full border border-[#C7C7C7] rounded-[6px] px-[14px] py-[11px] mt-1 text-[14px] text-[#202020] outline-none"
             />
           </div>
@@ -69,6 +70,7 @@ const SKUModal: React.FC<SKUModalProps> = ({ sku, onClose, onSave }) => {
               onChange={handleChange}
               placeholder="Class"
               required
+              disabled={!!sku?.id}
               className="w-full border border-[#C7C7C7] rounded-[6px] px-[14px] py-[11px] mt-1 text-[14px] text-[#202020] outline-none"
             />
           </div>
@@ -84,6 +86,7 @@ const SKUModal: React.FC<SKUModalProps> = ({ sku, onClose, onSave }) => {
               onChange={handleChange}
               placeholder="Department"
               required
+              disabled={!!sku?.id}
               className="w-full border border-[#C7C7C7] rounded-[6px] px-[14px] py-[11px] mt-1 text-[14px] text-[#202020] outline-none"
             />
           </div>
