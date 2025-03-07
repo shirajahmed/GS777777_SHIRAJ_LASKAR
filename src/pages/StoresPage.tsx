@@ -1,4 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { AllCommunityModule, ColDef, ModuleRegistry } from "ag-grid-community";
+import { AgGridReact } from "ag-grid-react";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { FiEdit, FiTrash2 } from "react-icons/fi";
+import ConfirmationModal from "../components/ConfirmationModal";
+import Preloader from "../components/Preloader";
+import StoreModal from "../components/StoreModal";
 import {
   createStore,
   deleteStore,
@@ -6,12 +13,6 @@ import {
   updateStore,
 } from "../services/api";
 import { Store } from "../types";
-import Preloader from "../components/Preloader";
-import StoreModal from "../components/StoreModal";
-import { FiEdit, FiTrash2 } from "react-icons/fi";
-import { AllCommunityModule, ModuleRegistry, ColDef } from "ag-grid-community";
-import { AgGridReact } from "ag-grid-react";
-import ConfirmationModal from "../components/ConfirmationModal";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
@@ -29,27 +30,45 @@ const StoresPage = () => {
 
   const loadStores = async () => {
     setLoading(true);
-    const data = await fetchStores();
-    setStores(data);
-    setLoading(false);
+    try {
+      const data = await fetchStores();
+      setStores(data);
+    } catch {
+      toast.error(`Error loading stores`);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSave = async (store: Omit<Store, "Seq No.">) => {
-    if (selectedStore) {
-      await updateStore(selectedStore.id, store);
-    } else {
-      await createStore(store);
+    try {
+      if (selectedStore) {
+        await updateStore(selectedStore.id, store);
+        toast.success("Update successful!");
+      } else {
+        await createStore(store);
+        toast.success("Create successful!");
+      }
+      loadStores();
+    } catch {
+      toast.error(`Error saving store`);
     }
-    loadStores();
   };
 
   const handleDelete = async () => {
     if (storeToDelete) {
       setIsConfirmModalOpen(false);
       setLoading(true);
-      await deleteStore(storeToDelete.id);
-      loadStores();
-      setStoreToDelete(null);
+      try {
+        await deleteStore(storeToDelete.id);
+        loadStores();
+        setStoreToDelete(null);
+        toast.success("Delete successful!");
+      } catch {
+        toast.error(`Error deleting store`);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 

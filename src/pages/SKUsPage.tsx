@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { AllCommunityModule, ColDef, ModuleRegistry } from "ag-grid-community";
+import { AgGridReact } from "ag-grid-react";
+import { useEffect, useState } from "react";
+import { FiEdit, FiTrash2 } from "react-icons/fi";
+import ConfirmationModal from "../components/ConfirmationModal";
+import Preloader from "../components/Preloader";
+import SKUModal from "../components/SKUModal";
 import { createSKU, deleteSKU, fetchSKUs, updateSKU } from "../services/api";
 import { SKU } from "../types";
-import Preloader from "../components/Preloader";
-import { FiEdit, FiTrash2 } from "react-icons/fi";
-import { AllCommunityModule, ModuleRegistry, ColDef } from "ag-grid-community";
-import { AgGridReact } from "ag-grid-react";
-import ConfirmationModal from "../components/ConfirmationModal";
-import SKUModal from "../components/SKUModal";
+import toast from "react-hot-toast";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
@@ -24,27 +25,45 @@ const SKUsPage = () => {
 
   const loadSKUs = async () => {
     setLoading(true);
-    const data = await fetchSKUs();
-    setSKUs(data);
-    setLoading(false);
+    try {
+      const data = await fetchSKUs();
+      setSKUs(data);
+    } catch {
+      toast.error(`Error loading SKUs`);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSave = async (sku: Omit<SKU, "id">) => {
-    if (selectedSKU) {
-      await updateSKU(selectedSKU.id, sku);
-    } else {
-      await createSKU(sku);
+    try {
+      if (selectedSKU) {
+        await updateSKU(selectedSKU.id, sku);
+        toast.success("Update successful!");
+      } else {
+        await createSKU(sku);
+        toast.success("Create successful!");
+      }
+      loadSKUs();
+    } catch {
+      toast.error(`Error saving SKU`);
     }
-    loadSKUs();
   };
 
   const handleDelete = async () => {
     if (skuToDelete) {
       setIsConfirmModalOpen(false);
       setLoading(true);
-      await deleteSKU(skuToDelete.id);
-      loadSKUs();
-      setSKUToDelete(null);
+      try {
+        await deleteSKU(skuToDelete.id);
+        loadSKUs();
+        setSKUToDelete(null);
+        toast.success("Delete successful!");
+      } catch {
+        toast.error(`Error deleting SKU`);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 

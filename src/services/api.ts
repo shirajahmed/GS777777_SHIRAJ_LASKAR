@@ -52,3 +52,8 @@ export const fetchChartData = async () => {
   const response = await axios.get(`${API_BASE_URL}/chart`);
   return response.data;
 };
+
+export const fetchCalculations = async () => {
+  const response = await axios.get(`${API_BASE_URL}/calculations`);
+  return response.data;
+};

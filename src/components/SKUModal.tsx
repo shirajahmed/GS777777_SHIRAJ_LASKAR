@@ -93,7 +93,7 @@ const SKUModal: React.FC<SKUModalProps> = ({ sku, onClose, onSave }) => {
               Price
             </label>
             <input
-              type="text"
+              type="number"
               name="Price"
               value={formData.Price}
               onChange={handleChange}
@@ -108,7 +108,7 @@ const SKUModal: React.FC<SKUModalProps> = ({ sku, onClose, onSave }) => {
               Cost
             </label>
             <input
-              type="text"
+              type="number"
               name="Cost"
               value={formData.Cost}
               onChange={handleChange}

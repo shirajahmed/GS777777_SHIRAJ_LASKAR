@@ -6,20 +6,24 @@ import {
   AgCartesianAxisOptions,
   AgCartesianSeriesOptions,
 } from "ag-charts-community";
+import Preloader from "../components/Preloader";
 
 const ChartPage = () => {
   const [chartData, setChartData] = useState<ChartData[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getData = async () => {
+      setLoading(true);
       const data = await fetchChartData();
-      // Transform data to numerical values
+
       const transformedData = data.map((item: ChartData) => ({
         Week: item.Week,
         gmDollars: parseFloat(item["GM Dollars"].replace(/[$,]/g, "")),
         gmPercentage: parseFloat(item["GM %"].replace("%", "")),
       }));
       setChartData(transformedData);
+      setLoading(false);
     };
     getData();
   }, []);
@@ -81,6 +85,10 @@ const ChartPage = () => {
       },
     ] as AgCartesianAxisOptions[],
   };
+
+  if (loading) {
+    return <Preloader />;
+  }
 
   return (
     <div className="w-full text-white py-6 h-full">
