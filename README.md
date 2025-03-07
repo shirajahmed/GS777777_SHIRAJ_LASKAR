@@ -1,3 +1,33 @@
+# Setup & Run
+
+git clone https://github.com/shirajahmed/GS777777_SHIRAJ_LASKAR.git
+
+npm install
+
+npm run dev
+
+Access at http://localhost:5173.
+
+# What I Did Well
+
+user-friendly UI with simple auth
+AG-Grid Integration: Properly implemented calculations and conditional formatting
+Store & SKU Management CRUD operations with drag-and-drop reordering.
+Chart Implementation Visualizing GM $ and GM %
+
+# If I Had 4 More Hours
+
+Fix Small small bugs
+Mobile Responsive
+Optimize Performance
+Improve UX Add animations (Framer Motion)
+Backend Integration Store data persistently using Firebase/PostgreSQL
+
+# Feedback on the Challenge
+
+Could include backend API references to simulate real-world usage
+As a developer with 2 years of experience, getting such a task in the first round is quite challenging, especially for job seekers. It would be more effective in the final round, where candidates can give their best effort. Putting in so much work and not getting selected feels discouraging, especially after multiple submissions with no response.
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -24,31 +54,31 @@ export default tseslint.config({
   languageOptions: {
     // other options...
     parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
       tsconfigRootDir: import.meta.dirname,
     },
   },
-})
+});
 ```
 
 You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
 ```js
 // eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+import reactX from "eslint-plugin-react-x";
+import reactDom from "eslint-plugin-react-dom";
 
 export default tseslint.config({
   plugins: {
     // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
+    "react-x": reactX,
+    "react-dom": reactDom,
   },
   rules: {
     // other rules...
     // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
+    ...reactX.configs["recommended-typescript"].rules,
     ...reactDom.configs.recommended.rules,
   },
-})
+});
 ```
